@@ -1,11 +1,17 @@
 import React from 'react';
 
-import {Text, TouchableOpacity, StyleSheet, TextStyle} from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  TextStyle,
+  TouchableOpacityProps,
+} from 'react-native';
 
 type Props = {
   text: string;
   variant: Variant;
-};
+} & TouchableOpacityProps;
 
 type Variant = 'primary' | 'secondary' | 'destroy';
 
