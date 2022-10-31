@@ -1,14 +1,23 @@
 import React from 'react';
 
 import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {useDispatch} from 'react-redux';
+
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import {login} from '../../reducer/loginReducer';
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const [loginData, setLoginData] = React.useState({
     login: '',
     password: '',
   });
+
+  const handleLogin = () => {
+    dispatch(login());
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -33,7 +42,11 @@ const Login = () => {
           keyboardType="default"
         />
         <View style={styles.buttonContainer}>
-          <Button text="login" variant="primary" />
+          <Button
+            text="login"
+            variant="primary"
+            onPress={() => handleLogin()}
+          />
         </View>
       </View>
     </SafeAreaView>
