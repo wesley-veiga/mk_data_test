@@ -4,20 +4,22 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  TextStyle,
   TouchableOpacityProps,
 } from 'react-native';
 
 type Props = {
   text: string;
   variant: Variant;
+  onPress: () => void;
 } & TouchableOpacityProps;
 
 type Variant = 'primary' | 'secondary' | 'destroy';
 
 const Button = (props: Props) => {
   return (
-    <TouchableOpacity style={styleContainer[props.variant]}>
+    <TouchableOpacity
+      style={styleContainer[props.variant]}
+      onPress={() => props.onPress()}>
       <Text style={styleText[props.variant]}>{props.text}</Text>
     </TouchableOpacity>
   );
