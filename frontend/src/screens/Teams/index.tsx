@@ -1,21 +1,16 @@
 import React from 'react';
 import {View} from 'react-native';
+import axios from 'axios';
+import {Team} from '../../reducer/teamReducer';
 
 const Teams = () => {
-  React.useEffect(() => {
-    getTeams();
-  }, []);
+  const [teams, setTeams] = React.useState<Array<Team>>();
 
-  const getTeams = async () => {
-    await fetch('http://192.168.100.23/3333/')
-      .then(res => res.json())
-      .then(res => {
-        console.log('res', res);
-      })
-      .catch(ex => {
-        console.log('ex', ex);
-      });
-  };
+  React.useEffect(() => {
+    axios.get('http://localhost:3333/teams/').then((response: Array<Team>) => {
+      return setTeams(response);
+    });
+  }, []);
 
   return <View style={{flex: 1}} />;
 };

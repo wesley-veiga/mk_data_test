@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 type Action = {
   type: string;
   payload?: Team;
@@ -26,3 +28,8 @@ export const reducer = (state = INITIAL_STATE, action: Action) => {
       return state;
   }
 };
+
+const listTeams = (list_teams: Array<Team>) => ({
+  type: Types.LIST_TEAMS,
+  payload: list_teams,
+});

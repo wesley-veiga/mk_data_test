@@ -4,17 +4,25 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import Login from './login';
+import Customers from './customers';
+import Teams from './Teams';
 
-export type RootStackParamList = {
+export type LoginStackParamList = {
   login: undefined;
 };
 
+export type RootStackParamList = {
+  customers: undefined;
+  teams: undefined;
+};
+
 const Routes = () => {
-  const Stack = createStackNavigator<RootStackParamList>();
+  const Stack = createStackNavigator<LoginStackParamList>();
+  const Drawer = createDrawerNavigator<RootStackParamList>();
 
   const is_logged = false;
 
-  if (!is_logged) {
+  if (is_logged) {
     return (
       <NavigationContainer>
         <Stack.Navigator
@@ -28,7 +36,14 @@ const Routes = () => {
     );
   }
 
-  return <React.Fragment />;
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="customers">
+        <Drawer.Screen name="customers" component={Customers} />
+        <Drawer.Screen name="teams" component={Teams} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
 };
 
 export default Routes;
