@@ -1,14 +1,21 @@
 import React from 'react';
-import {FlatList, View, Text, StyleSheet} from 'react-native';
-import {useFocusEffect} from '@react-navigation/native';
+import {FlatList, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {Team} from '../../reducer/teamReducer';
+import {RootStackParamList} from '../routes';
+import {AddButton} from '../../components/AddButton';
 
 type Item = {
   item: Team;
   index: number;
 };
 
+type DetailSreenProp = DrawerNavigationProp<RootStackParamList, 'detailTeam'>;
+
 const Teams = () => {
+  const navigation = useNavigation<DetailSreenProp>();
+
   const [teams, setTeams] = React.useState({
     loading: false,
     error: false,
@@ -48,9 +55,18 @@ const Teams = () => {
   );
 
   const renderTeams = ({item, index}: Item) => (
-    <View style={styles.renderItemContainer}>
+    <TouchableOpacity
+      style={styles.renderItemContainer}
+      onPress={() =>
+        navigation.navigate('detailTeam', {
+          team: item,
+        })
+      }>
       <Text style={styles.renderItemText}>Nome: {item.name}</Text>
-    </View>
+      <Text style={styles.renderItemText}>
+        Status: {item.is_active ? 'Ativo' : 'Desativado'}
+      </Text>
+    </TouchableOpacity>
   );
 
   const renderEmptyData = () => {
@@ -69,17 +85,24 @@ const Teams = () => {
   };
 
   return (
-    <FlatList
-      style={styles.container}
-      data={teams.teams}
-      refreshing={teams.loading}
-      onRefresh={() => getAllTeams()}
-      keyExtractor={(item, index) => {
-        return index.toString();
-      }}
-      renderItem={renderTeams}
-      ListEmptyComponent={renderEmptyData}
-    />
+    <>
+      <FlatList
+        style={styles.container}
+        data={teams.teams}
+        refreshing={teams.loading}
+        onRefresh={() => getAllTeams()}
+        keyExtractor={(item, index) => {
+          return index.toString();
+        }}
+        renderItem={renderTeams}
+        ListEmptyComponent={renderEmptyData}
+      />
+      <AddButton
+        iconColor="#FFF"
+        iconSize={40}
+        onPress={() => navigation.navigate('addTeam')}
+      />
+    </>
   );
 };
 
