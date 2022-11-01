@@ -31,10 +31,8 @@ export const reducer = (state = INITIAL_STATE, action: Action) => {
 
 export const login = () => ({
   type: Types.LOGIN,
-  payload: true,
 });
 
 export const logoff = () => ({
   type: Types.LOGOFF,
-  payload: false,
 });

@@ -12,6 +12,9 @@ export type stateReducer = {
   customerReducer: {
     customers: Array<Customer>;
   };
+  loginReducer: {
+    is_logged: boolean;
+  };
 };
 
 const reducer = combineReducers({
