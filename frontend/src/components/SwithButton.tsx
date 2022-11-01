@@ -10,7 +10,7 @@ export const SwitchButton = (props: Props) => {
   const {text, value} = props;
   return (
     <View style={styles.switchContainer}>
-      <Text style={{fontSize: 18}}>{text}</Text>
+      <Text style={{fontSize: 18, color: '#000'}}>{text}</Text>
       <Switch
         {...props}
         trackColor={{false: '#767577', true: '#81b0ff'}}
