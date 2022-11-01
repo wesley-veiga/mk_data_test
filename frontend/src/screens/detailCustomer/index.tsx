@@ -6,9 +6,9 @@ import {RootStackParamList} from '../routes';
 import Input from '../../components/Input';
 import {SwitchButton} from '../../components/SwithButton';
 import Dropdown from '../../components/DropDown';
-import {Team} from '../../reducer/teamReducer';
 import Button from '../../components/Button';
 import axios from 'axios';
+import {Team} from '../../configs/types';
 
 type Data = {
   label: string;

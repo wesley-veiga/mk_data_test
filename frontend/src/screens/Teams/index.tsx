@@ -2,9 +2,9 @@ import React from 'react';
 import {FlatList, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {Team} from '../../reducer/teamReducer';
 import {RootStackParamList} from '../routes';
 import {AddButton} from '../../components/AddButton';
+import {Team} from '../../configs/types';
 
 type Item = {
   item: Team;

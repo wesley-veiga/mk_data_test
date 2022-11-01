@@ -1,8 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {combineReducers} from 'redux';
+import {Customer, Team} from '../configs/types';
 
-import {Team, reducer as teamReducer} from './teamReducer';
-import {Customer, reducer as customerReducer} from './customersReducer';
 import {reducer as loginReducer} from './loginReducer';
 
 export type stateReducer = {
@@ -18,8 +17,6 @@ export type stateReducer = {
 };
 
 const reducer = combineReducers({
-  teamReducer,
-  customerReducer,
   loginReducer,
 });
 

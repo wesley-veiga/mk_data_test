@@ -3,9 +3,9 @@ import {View, Text, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {useFocusEffect} from '@react-navigation/native';
-import {Customer} from '../../reducer/customersReducer';
 import {RootStackParamList} from '../routes';
 import {AddButton} from '../../components/AddButton';
+import {Customer} from '../../configs/types';
 
 type Item = {
   item: Customer;

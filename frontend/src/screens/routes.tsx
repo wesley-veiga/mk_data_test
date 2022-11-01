@@ -2,8 +2,6 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {Team} from '../reducer/teamReducer';
-import {Customer} from '../reducer/customersReducer';
 
 import Login from './login';
 import Customers from './customers';
@@ -12,6 +10,7 @@ import AddCustomer from './addCustomer';
 import Teams from './Teams';
 import DetailTeam from './detailTeam';
 import AddTeam from './addTeam';
+import {Customer, Team} from '../configs/types';
 
 export type LoginStackParamList = {
   login: undefined;

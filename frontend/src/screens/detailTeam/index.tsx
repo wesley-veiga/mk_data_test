@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Switch, Text, StyleSheet, Alert} from 'react-native';
+import {View, StyleSheet, Alert} from 'react-native';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import axios from 'axios';
