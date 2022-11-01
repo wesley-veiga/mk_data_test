@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
 import axios from 'axios';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -15,6 +15,16 @@ const AddTeam = () => {
     name: '',
     is_active: false,
   });
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setNewTeam({
+        ...newTeam,
+        name: '',
+        is_active: false,
+      });
+    }, []),
+  );
 
   const saveTeam = () => {
     axios

@@ -1,7 +1,11 @@
 import React from 'react';
-import {View, Text, FlatList, StyleSheet} from 'react-native';
+import {View, Text, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {useFocusEffect} from '@react-navigation/native';
 import {Customer} from '../../reducer/customersReducer';
+import {RootStackParamList} from '../routes';
+import {AddButton} from '../../components/AddButton';
 
 type Item = {
   item: Customer;
@@ -9,6 +13,8 @@ type Item = {
 };
 
 const Customers = () => {
+  const navigation = useNavigation<DrawerNavigationProp<RootStackParamList>>();
+
   const [customers, setCustomers] = React.useState({
     loading: false,
     error: false,
@@ -48,14 +54,20 @@ const Customers = () => {
   );
 
   const renderCustomers = ({item, index}: Item) => (
-    <View style={styles.renderItemContainer}>
+    <TouchableOpacity
+      style={styles.renderItemContainer}
+      onPress={() =>
+        navigation.navigate('detailCustomer', {
+          customer: item,
+        })
+      }>
       <Text style={styles.renderItemText}>Nome: {item.name}</Text>
       <Text style={styles.renderItemText}>Tipo: {item.type}</Text>
       <Text style={styles.renderItemText}>
         Status: {item.is_active ? 'Ativo' : 'Desativado'}
       </Text>
       <Text style={styles.renderItemText}>Grupo: {item.team_name}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
   const renderEmptyData = () => {
@@ -74,17 +86,24 @@ const Customers = () => {
   };
 
   return (
-    <FlatList
-      style={styles.container}
-      data={customers.customers}
-      refreshing={customers.loading}
-      onRefresh={() => getAllCustomers()}
-      keyExtractor={(item, index) => {
-        return index.toString();
-      }}
-      renderItem={renderCustomers}
-      ListEmptyComponent={renderEmptyData}
-    />
+    <>
+      <FlatList
+        style={styles.container}
+        data={customers.customers}
+        refreshing={customers.loading}
+        onRefresh={() => getAllCustomers()}
+        keyExtractor={(item, index) => {
+          return index.toString();
+        }}
+        renderItem={renderCustomers}
+        ListEmptyComponent={renderEmptyData}
+      />
+      <AddButton
+        iconColor="#FFF"
+        iconSize={40}
+        onPress={() => navigation.navigate('addCustomer')}
+      />
+    </>
   );
 };
 

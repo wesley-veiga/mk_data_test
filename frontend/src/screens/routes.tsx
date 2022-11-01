@@ -3,9 +3,12 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {Team} from '../reducer/teamReducer';
+import {Customer} from '../reducer/customersReducer';
 
 import Login from './login';
 import Customers from './customers';
+import DetailCustomer from './detailCustomer';
+import AddCustomer from './addCustomer';
 import Teams from './Teams';
 import DetailTeam from './detailTeam';
 import AddTeam from './addTeam';
@@ -16,6 +19,10 @@ export type LoginStackParamList = {
 
 export type RootStackParamList = {
   customers: undefined;
+  detailCustomer: {
+    customer: Customer;
+  };
+  addCustomer: undefined;
   teams: undefined;
   detailTeam: {
     team: Team;
@@ -50,6 +57,8 @@ const Routes = () => {
         <Drawer.Screen name="teams" component={Teams} />
         <Drawer.Screen name="detailTeam" component={DetailTeam} />
         <Drawer.Screen name="addTeam" component={AddTeam} />
+        <Drawer.Screen name="detailCustomer" component={DetailCustomer} />
+        <Drawer.Screen name="addCustomer" component={AddCustomer} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
