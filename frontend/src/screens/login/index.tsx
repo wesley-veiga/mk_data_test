@@ -34,8 +34,7 @@ const Login = () => {
         style={{
           fontSize: 50,
           color: '#FFF',
-          position: 'absolute',
-          top: 150,
+          top: '20%',
           left: 10,
         }}>
         Bem Vindo

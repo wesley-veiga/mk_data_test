@@ -123,8 +123,6 @@ const DetailCustomer = ({route}: any) => {
     );
   };
 
-  console.log('state: ', editing);
-
   return (
     <KeyboardAwareScrollView style={{backgroundColor: '#F9F9F9'}}>
       <Header

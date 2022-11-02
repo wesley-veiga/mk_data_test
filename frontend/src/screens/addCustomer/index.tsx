@@ -149,7 +149,7 @@ const AddCostumer = () => {
         <View style={{height: 10}} />
 
         <Input
-          question={editing.type === 'PF' ? 'CPF' : 'CNPJ'}
+          question={'CPF ou CNPJ'}
           value={editing.cpf_cnpj}
           onChangeText={t => setEditing({...editing, cpf_cnpj: t})}
         />
@@ -157,7 +157,7 @@ const AddCostumer = () => {
         <View style={{height: 10}} />
 
         <Input
-          question={editing.type === 'PF' ? 'RG' : 'IE'}
+          question={'RG ou IE'}
           value={editing.rg_ie}
           onChangeText={t => setEditing({...editing, rg_ie: t})}
         />
