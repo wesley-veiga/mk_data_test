@@ -4,13 +4,19 @@ import {useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {RootStackParamList} from '../screens/routes';
 import Icon from 'react-native-vector-icons/Octicons';
+import {logoff} from '../reducer/loginReducer';
+import {useDispatch} from 'react-redux';
 
 const SideMenu = () => {
   const navigation = useNavigation<DrawerNavigationProp<RootStackParamList>>();
 
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.exitContainer}>
+      <TouchableOpacity
+        style={styles.exitContainer}
+        onPress={() => dispatch(logoff())}>
         <Icon name="sign-out" color="#FFF" size={30} />
       </TouchableOpacity>
       <TouchableOpacity

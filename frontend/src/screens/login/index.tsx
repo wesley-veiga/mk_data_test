@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {View, StyleSheet, SafeAreaView, Text} from 'react-native';
 import {useDispatch} from 'react-redux';
 
 import Button from '../../components/Button';
@@ -21,6 +21,25 @@ const Login = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View
+        style={{
+          position: 'absolute',
+          height: '40%',
+          width: '100%',
+          backgroundColor: '#336699',
+          borderBottomRightRadius: 300,
+        }}
+      />
+      <Text
+        style={{
+          fontSize: 50,
+          color: '#FFF',
+          position: 'absolute',
+          top: 150,
+          left: 10,
+        }}>
+        Bem Vindo
+      </Text>
       <View style={styles.inputContainer}>
         <Input
           question="Usuário"

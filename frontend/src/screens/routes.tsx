@@ -2,6 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import {useSelector} from 'react-redux';
 
 import Login from './login';
 import Customers from './customers';
@@ -12,6 +13,7 @@ import DetailTeam from './detailTeam';
 import AddTeam from './addTeam';
 import {Customer, Team} from '../configs/types';
 import SideMenu from '../components/SideMenu';
+import {stateReducer} from '../reducer';
 
 export type LoginStackParamList = {
   login: undefined;
@@ -34,9 +36,11 @@ const Routes = () => {
   const Stack = createStackNavigator<LoginStackParamList>();
   const Drawer = createDrawerNavigator<RootStackParamList>();
 
-  const is_logged = false;
+  const is_logged = useSelector(
+    (state: stateReducer) => state.loginReducer.is_logged,
+  );
 
-  if (is_logged) {
+  if (!is_logged) {
     return (
       <NavigationContainer>
         <Stack.Navigator
