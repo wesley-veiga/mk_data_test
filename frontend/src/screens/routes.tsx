@@ -57,7 +57,7 @@ const Routes = () => {
         screenOptions={{
           headerShown: false,
         }}
-        drawerContent={props => <SideMenu {...props} />}>
+        drawerContent={(props: any) => <SideMenu {...props} />}>
         <Drawer.Screen name="customers" component={Customers} />
         <Drawer.Screen name="teams" component={Teams} />
         <Drawer.Screen name="detailTeam" component={DetailTeam} />
