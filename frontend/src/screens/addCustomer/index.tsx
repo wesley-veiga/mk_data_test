@@ -9,6 +9,7 @@ import Dropdown from '../../components/DropDown';
 import Button from '../../components/Button';
 import axios from 'axios';
 import {Team} from '../../configs/types';
+import Header from '../../components/Header';
 
 type Data = {
   label: string;
@@ -99,6 +100,7 @@ const AddCostumer = () => {
 
   return (
     <>
+      <Header title="Adicionar Cliente" leftAction="back" />
       <View style={styles.container}>
         <Input
           question="Nome"

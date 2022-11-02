@@ -5,6 +5,7 @@ import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {RootStackParamList} from '../routes';
 import {AddButton} from '../../components/AddButton';
 import {Team} from '../../configs/types';
+import Header from '../../components/Header';
 
 type Item = {
   item: Team;
@@ -62,7 +63,7 @@ const Teams = () => {
           team: item,
         })
       }>
-      <Text style={styles.renderItemText}>Nome: {item.name}</Text>
+      <Text style={styles.renderItemTitle}>{item.name}</Text>
       <Text style={styles.renderItemText}>
         Status: {item.is_active ? 'Ativo' : 'Desativado'}
       </Text>
@@ -86,6 +87,7 @@ const Teams = () => {
 
   return (
     <>
+      <Header title="Lista de Grupos" leftAction="menu" />
       <FlatList
         style={styles.container}
         data={teams.teams}
@@ -97,6 +99,7 @@ const Teams = () => {
         renderItem={renderTeams}
         ListEmptyComponent={renderEmptyData}
       />
+      <View style={{height: 20}} />
       <AddButton
         iconColor="#FFF"
         iconSize={40}
@@ -112,17 +115,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#F9F9F9',
+    backgroundColor: '#eef0f2',
   },
   renderItemContainer: {
-    backgroundColor: '#FFF',
+    backgroundColor: '#e9e9e8',
     borderWidth: 1,
-    borderColor: '#C9C9C9',
+    borderColor: '#e8e8e8',
     marginVertical: 5,
     borderRadius: 5,
     padding: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 1.0,
+
+    elevation: 1,
+  },
+  renderItemTitle: {
+    fontSize: 25,
+    color: '#353b3c',
+    fontWeight: 'bold',
   },
   renderItemText: {
-    color: '#000',
+    color: '#353b3c',
   },
 });

@@ -11,6 +11,7 @@ import Teams from './Teams';
 import DetailTeam from './detailTeam';
 import AddTeam from './addTeam';
 import {Customer, Team} from '../configs/types';
+import SideMenu from '../components/SideMenu';
 
 export type LoginStackParamList = {
   login: undefined;
@@ -51,7 +52,12 @@ const Routes = () => {
 
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="customers">
+      <Drawer.Navigator
+        initialRouteName="customers"
+        screenOptions={{
+          headerShown: false,
+        }}
+        drawerContent={props => <SideMenu {...props} />}>
         <Drawer.Screen name="customers" component={Customers} />
         <Drawer.Screen name="teams" component={Teams} />
         <Drawer.Screen name="detailTeam" component={DetailTeam} />

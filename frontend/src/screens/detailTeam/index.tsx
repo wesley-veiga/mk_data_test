@@ -8,6 +8,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import {RootStackParamList} from '../routes';
 import {SwitchButton} from '../../components/SwithButton';
+import Header from '../../components/Header';
 
 const DetailTeam = ({route}: any) => {
   const {team} = route.params;
@@ -69,6 +70,7 @@ const DetailTeam = ({route}: any) => {
 
   return (
     <>
+      <Header title="Editar Grupo" leftAction="back" />
       <View style={styles.container}>
         <Input
           question="Nome"

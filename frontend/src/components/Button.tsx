@@ -31,7 +31,7 @@ const styleContainer = StyleSheet.create({
   primary: {
     height: 50,
     width: 200,
-    backgroundColor: 'green',
+    backgroundColor: '#86bbd8',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5,
@@ -48,7 +48,7 @@ const styleContainer = StyleSheet.create({
   destroy: {
     height: 50,
     width: 200,
-    backgroundColor: 'red',
+    backgroundColor: '#c62020ac',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5,
@@ -66,6 +66,6 @@ const styleText = StyleSheet.create({
   },
   destroy: {
     fontSize: 20,
-    color: '#000',
+    color: '#FFF',
   },
 });

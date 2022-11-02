@@ -7,6 +7,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import {SwitchButton} from '../../components/SwithButton';
 import {RootStackParamList} from '../routes';
+import Header from '../../components/Header';
 
 const AddTeam = () => {
   const navigation = useNavigation<DrawerNavigationProp<RootStackParamList>>();
@@ -50,6 +51,7 @@ const AddTeam = () => {
   };
   return (
     <>
+      <Header title="Adicionar Grupo" leftAction="back" />
       <View style={styles.container}>
         <Input
           question="Nome"

@@ -13,8 +13,8 @@ export const SwitchButton = (props: Props) => {
       <Text style={{fontSize: 18, color: '#000'}}>{text}</Text>
       <Switch
         {...props}
-        trackColor={{false: '#767577', true: '#81b0ff'}}
-        thumbColor={value ? '#f5dd4b' : '#f4f3f4'}
+        trackColor={{false: '#bd2020', true: '#daf7dc'}}
+        thumbColor={value ? '#9EE493' : '#3e3e3e'}
         ios_backgroundColor="#3e3e3e"
         value={value}
       />
