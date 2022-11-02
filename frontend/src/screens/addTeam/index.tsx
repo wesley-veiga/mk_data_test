@@ -51,7 +51,11 @@ const AddTeam = () => {
   };
   return (
     <>
-      <Header title="Adicionar Grupo" leftAction="back" />
+      <Header
+        title="Adicionar Grupo"
+        leftIcon="back"
+        leftAction={() => navigation.navigate('teams')}
+      />
       <View style={styles.container}>
         <Input
           question="Nome"

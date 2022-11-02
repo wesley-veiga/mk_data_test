@@ -69,13 +69,7 @@ const Dropdown: FC<Props> = ({label, data, onSelect, question, disabled}) => {
   };
 
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        width: '100%',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}>
+    <View>
       <Text style={styles.question}>{question}</Text>
       <TouchableOpacity
         ref={DropdownButton}
@@ -101,7 +95,7 @@ const styles = StyleSheet.create({
     borderColor: '#C9C9C9',
     height: 50,
     zIndex: 1,
-    width: 300,
+    width: 255,
   },
   buttonText: {
     flex: 1,
@@ -113,9 +107,9 @@ const styles = StyleSheet.create({
   dropdown: {
     position: 'absolute',
     backgroundColor: '#fff',
-    width: 300,
-    right: 10,
-    alignSelf: 'flex-end',
+    width: 255,
+    left: 10,
+    alignSelf: 'flex-start',
     shadowColor: '#000000',
     shadowRadius: 4,
     shadowOffset: {height: 4, width: 0},
@@ -133,7 +127,7 @@ const styles = StyleSheet.create({
   question: {
     fontSize: 18,
     color: '#272727',
-    marginRight: 20,
+    marginBottom: 20,
   },
 });
 

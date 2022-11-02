@@ -16,6 +16,7 @@ const DetailTeam = ({route}: any) => {
   const navigation = useNavigation<DrawerNavigationProp<RootStackParamList>>();
 
   const [editing, setEditing] = React.useState({
+    loading: false,
     isEditing: false,
     name: '',
     is_active: false,
@@ -36,6 +37,7 @@ const DetailTeam = ({route}: any) => {
     if (!editing.isEditing) {
       setEditing({...editing, isEditing: true});
     } else {
+      setEditing({...editing, loading: true});
       axios
         .put('http://localhost:3333/team/' + team.id, {
           name: editing.name,
@@ -46,10 +48,27 @@ const DetailTeam = ({route}: any) => {
             ? Alert.alert(
                 'Sucesso',
                 'A alteração no grupo foi salva com sucesso',
-                [{text: 'Ok', onPress: () => navigation.navigate('teams')}],
+                [
+                  {
+                    text: 'Ok',
+                    onPress: () => {
+                      navigation.navigate('teams');
+                      setEditing({
+                        ...editing,
+                        loading: false,
+                        isEditing: false,
+                        name: '',
+                        is_active: false,
+                      });
+                    },
+                  },
+                ],
               )
             : Alert.alert('Falha', 'Não foi possível salvar a alteração', [
-                {text: 'Ok'},
+                {
+                  text: 'Ok',
+                  onPress: () => setEditing({...editing, loading: false}),
+                },
               ]);
         });
     }
@@ -70,7 +89,11 @@ const DetailTeam = ({route}: any) => {
 
   return (
     <>
-      <Header title="Editar Grupo" leftAction="back" />
+      <Header
+        title="Editar Grupo"
+        leftIcon="back"
+        leftAction={() => navigation.navigate('teams')}
+      />
       <View style={styles.container}>
         <Input
           question="Nome"

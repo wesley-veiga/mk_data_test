@@ -50,7 +50,8 @@ const Customers = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      customers.data.length == 0 && getAllCustomers();
+      setCustomers({...customers, customers: [], data: []});
+      getAllCustomers();
     }, []),
   );
 
@@ -88,7 +89,11 @@ const Customers = () => {
 
   return (
     <>
-      <Header title="Lista de Clientes" leftAction="menu" />
+      <Header
+        title="Lista de Clientes"
+        leftIcon="menu"
+        leftAction={() => navigation.openDrawer()}
+      />
       <FlatList
         style={styles.container}
         data={customers.customers}

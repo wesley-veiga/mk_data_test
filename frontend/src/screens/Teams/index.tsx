@@ -51,7 +51,8 @@ const Teams = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      teams.data.length == 0 && getAllTeams();
+      setTeams({...teams, teams: [], data: []});
+      getAllTeams();
     }, []),
   );
 
@@ -87,7 +88,11 @@ const Teams = () => {
 
   return (
     <>
-      <Header title="Lista de Grupos" leftAction="menu" />
+      <Header
+        title="Lista de Grupos"
+        leftIcon="menu"
+        leftAction={() => navigation.openDrawer()}
+      />
       <FlatList
         style={styles.container}
         data={teams.teams}

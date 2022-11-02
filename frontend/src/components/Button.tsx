@@ -5,12 +5,14 @@ import {
   TouchableOpacity,
   StyleSheet,
   TouchableOpacityProps,
+  ActivityIndicator,
 } from 'react-native';
 
 type Props = {
   text: string;
   variant: Variant;
   onPress: () => void;
+  loading?: boolean;
 } & TouchableOpacityProps;
 
 type Variant = 'primary' | 'secondary' | 'destroy';
@@ -20,7 +22,11 @@ const Button = (props: Props) => {
     <TouchableOpacity
       style={styleContainer[props.variant]}
       onPress={() => props.onPress()}>
-      <Text style={styleText[props.variant]}>{props.text}</Text>
+      {props.loading ? (
+        <ActivityIndicator size={'small'} />
+      ) : (
+        <Text style={styleText[props.variant]}>{props.text}</Text>
+      )}
     </TouchableOpacity>
   );
 };

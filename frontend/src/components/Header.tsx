@@ -13,22 +13,23 @@ import {RootStackParamList} from '../screens/routes';
 
 type Props = {
   title: string;
-  leftAction: 'back' | 'menu';
+  leftAction: () => void;
+  leftIcon: 'back' | 'menu';
 };
 const Header = (props: Props) => {
-  const {title, leftAction} = props;
+  const {title, leftAction, leftIcon} = props;
   const navigation = useNavigation<DrawerNavigationProp<RootStackParamList>>();
 
   const Action = () => {
-    if (leftAction === 'menu') return navigation.openDrawer();
+    if (leftIcon === 'menu') return navigation.openDrawer();
 
-    return navigation.goBack();
+    return leftAction();
   };
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} backgroundColor={'#336699'} />
       <TouchableOpacity onPress={() => Action()}>
-        {leftAction === 'menu' ? (
+        {leftIcon === 'menu' ? (
           <Icon name="bars" size={30} color="#FFF" />
         ) : (
           <Icon name="arrow-left" size={30} color="#FFF" />

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Alert} from 'react-native';
+import {StyleSheet, View, Alert, KeyboardAvoidingView} from 'react-native';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {RootStackParamList} from '../routes';
@@ -10,6 +10,7 @@ import Button from '../../components/Button';
 import axios from 'axios';
 import {Team} from '../../configs/types';
 import Header from '../../components/Header';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 type Data = {
   label: string;
@@ -99,8 +100,12 @@ const AddCostumer = () => {
   };
 
   return (
-    <>
-      <Header title="Adicionar Cliente" leftAction="back" />
+    <KeyboardAwareScrollView style={{backgroundColor: '#F9F9F9'}}>
+      <Header
+        title="Adicionar Cliente"
+        leftAction={() => navigation.navigate('customers')}
+        leftIcon="back"
+      />
       <View style={styles.container}>
         <Input
           question="Nome"
@@ -156,16 +161,16 @@ const AddCostumer = () => {
           }
           disabled={false}
         />
+        <View style={styles.buttonContainer}>
+          <Button
+            variant="primary"
+            text={'Salvar'}
+            onPress={() => saveCustomer()}
+          />
+          <View style={{height: 10}} />
+        </View>
       </View>
-      <View style={styles.buttonContainer}>
-        <Button
-          variant="primary"
-          text={'Salvar'}
-          onPress={() => saveCustomer()}
-        />
-        <View style={{height: 10}} />
-      </View>
-    </>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -178,9 +183,9 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   buttonContainer: {
+    marginTop: 50,
     alignItems: 'center',
     backgroundColor: '#F9F9F9',
-    paddingBottom: 20,
     width: '100%',
   },
 });

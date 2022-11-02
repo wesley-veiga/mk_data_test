@@ -10,6 +10,7 @@ import Button from '../../components/Button';
 import axios from 'axios';
 import {Team} from '../../configs/types';
 import Header from '../../components/Header';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 type Data = {
   label: string;
@@ -27,12 +28,13 @@ const DetailCustomer = ({route}: any) => {
 
   const [editing, setEditing] = React.useState({
     isEditing: false,
-    name: '',
+    loading: false,
+    name: customer.name,
     is_active: false,
-    team: '',
-    rg_ie: '',
-    cpf_cnpj: '',
-    type: '',
+    team: customer.team,
+    rg_ie: customer.rg_ie,
+    cpf_cnpj: customer.cpf_cnpj,
+    type: customer.type,
   });
 
   const [teams, setTeams] = React.useState({
@@ -64,12 +66,14 @@ const DetailCustomer = ({route}: any) => {
 
       setEditing({
         ...editing,
-        name: '',
+        isEditing: false,
+        loading: false,
+        name: customer.name,
         is_active: false,
-        team: '',
-        rg_ie: '',
-        cpf_cnpj: '',
-        type: '',
+        team: customer.team,
+        rg_ie: customer.rg_ie,
+        cpf_cnpj: customer.cpf_cnpj,
+        type: customer.type,
       });
     }, []),
   );
@@ -78,6 +82,7 @@ const DetailCustomer = ({route}: any) => {
     if (!editing.isEditing) {
       setEditing({...editing, isEditing: true});
     } else {
+      setEditing({...editing, loading: true});
       axios
         .put('http://localhost:3333/customer/' + customer.id, {
           name: editing.name,
@@ -88,6 +93,7 @@ const DetailCustomer = ({route}: any) => {
           type: editing.type,
         })
         .then(res => {
+          setEditing({...editing, loading: false});
           res.data.result === 'success'
             ? Alert.alert(
                 'Sucesso',
@@ -101,11 +107,29 @@ const DetailCustomer = ({route}: any) => {
     }
   };
 
-  console.log('sa s', customer);
+  const deleteCustomer = () => {
+    const executeDelete = () => setEditing({...editing, loading: true});
+    axios.delete('http://localhost:3333/customer/' + customer.id).then(res => {
+      navigation.navigate('customers');
+      setEditing({...editing, loading: false});
+    });
+
+    Alert.alert(
+      'Atenção',
+      'Deseja realmente excluir o cliente ' + customer.name + '?',
+      [{text: 'Ok', onPress: () => executeDelete()}, {text: 'cancelar'}],
+    );
+  };
+
+  console.log('state: ', editing);
 
   return (
-    <>
-      <Header title="Editar Cliente" leftAction="back" />
+    <KeyboardAwareScrollView style={{backgroundColor: '#F9F9F9'}}>
+      <Header
+        title="Editar Cliente"
+        leftIcon="back"
+        leftAction={() => navigation.navigate('customers')}
+      />
       <View style={styles.container}>
         <Input
           question="Nome"
@@ -137,24 +161,6 @@ const DetailCustomer = ({route}: any) => {
 
         <View style={{height: 10}} />
 
-        <Input
-          question={editing.type === 'PF' ? 'CPF' : 'CNPJ'}
-          placeholder={customer.cpf_cnpj}
-          editable={editing.isEditing}
-          onChangeText={t => setEditing({...editing, name: t})}
-        />
-
-        <View style={{height: 10}} />
-
-        <Input
-          question={editing.type === 'PF' ? 'RG' : 'IE'}
-          placeholder={customer.rg_ie}
-          editable={editing.isEditing}
-          onChangeText={t => setEditing({...editing, name: t})}
-        />
-
-        <View style={{height: 10}} />
-
         <Dropdown
           question="Grupo: "
           label={customer.team_name}
@@ -164,6 +170,24 @@ const DetailCustomer = ({route}: any) => {
           }
           disabled={!editing.isEditing}
         />
+
+        <View style={{height: 10}} />
+
+        <Input
+          question="CPF ou CNPJ"
+          placeholder={customer.cpf_cnpj}
+          editable={editing.isEditing}
+          onChangeText={t => setEditing({...editing, cpf_cnpj: t})}
+        />
+
+        <View style={{height: 10}} />
+
+        <Input
+          question="RG ou IE"
+          placeholder={customer.rg_ie}
+          editable={editing.isEditing}
+          onChangeText={t => setEditing({...editing, rg_ie: t})}
+        />
       </View>
       <View style={styles.buttonContainer}>
         <Button
@@ -172,9 +196,13 @@ const DetailCustomer = ({route}: any) => {
           onPress={() => editOrSave()}
         />
         <View style={{height: 10}} />
-        <Button variant="destroy" text="Excluir" onPress={() => {}} />
+        <Button
+          variant="destroy"
+          text="Excluir"
+          onPress={() => deleteCustomer()}
+        />
       </View>
-    </>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -187,9 +215,9 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   buttonContainer: {
+    marginTop: 20,
     alignItems: 'center',
     backgroundColor: '#F9F9F9',
-    paddingBottom: 20,
     width: '100%',
   },
 });
