@@ -108,11 +108,13 @@ const DetailCustomer = ({route}: any) => {
   };
 
   const deleteCustomer = () => {
-    const executeDelete = () => setEditing({...editing, loading: true});
-    axios.delete('http://localhost:3333/customer/' + customer.id).then(res => {
-      navigation.navigate('customers');
-      setEditing({...editing, loading: false});
-    });
+    const executeDelete = () =>
+      axios
+        .delete('http://localhost:3333/customer/' + customer.id)
+        .then(res => {
+          navigation.navigate('customers');
+          setEditing({...editing, loading: false});
+        });
 
     Alert.alert(
       'Atenção',

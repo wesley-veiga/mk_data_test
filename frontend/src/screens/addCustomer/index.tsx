@@ -88,7 +88,7 @@ const AddCostumer = () => {
               'Sucesso',
               'O novo grupo foi salvo com sucesso. Adicionar um novo?',
               [
-                {text: 'Não', onPress: () => navigation.navigate('teams')},
+                {text: 'Não', onPress: () => navigation.navigate('customers')},
                 {
                   text: 'Sim',
                   onPress: () => {},
@@ -136,6 +136,18 @@ const AddCostumer = () => {
 
         <View style={{height: 10}} />
 
+        <Dropdown
+          question="Grupo: "
+          label={'Selecione um grupo'}
+          data={teams.data}
+          onSelect={value =>
+            setTeams({...teams, teamSelected: parseInt(value.value)})
+          }
+          disabled={false}
+        />
+
+        <View style={{height: 10}} />
+
         <Input
           question={editing.type === 'PF' ? 'CPF' : 'CNPJ'}
           value={editing.cpf_cnpj}
@@ -150,17 +162,6 @@ const AddCostumer = () => {
           onChangeText={t => setEditing({...editing, rg_ie: t})}
         />
 
-        <View style={{height: 10}} />
-
-        <Dropdown
-          question="Grupo: "
-          label={'Selecione um grupo'}
-          data={teams.data}
-          onSelect={value =>
-            setTeams({...teams, teamSelected: parseInt(value.value)})
-          }
-          disabled={false}
-        />
         <View style={styles.buttonContainer}>
           <Button
             variant="primary"
